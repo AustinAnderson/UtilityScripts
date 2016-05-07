@@ -1,0 +1,16 @@
+#!/bin/bash
+if [[ $# < 1 ]]; then
+    echo "Usage: $0 <ScriptName(s)>"
+    exit 1
+fi
+
+for i in $@; do
+    echo '#!/bin/bash'> $i
+    echo "#$i: Script to ...">> $i
+    echo "#Created: $(date)">> $i
+    echo ''>>$i
+    echo 'exit 0'>>$i
+    chmod +x $i
+done;
+vim -p $@
+exit 0

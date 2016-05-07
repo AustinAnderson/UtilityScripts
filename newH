@@ -1,0 +1,22 @@
+#!/bin/bash
+#newHpp: Script to create new h files
+#Created: Fri May  6 17:26:46 CDT 2016
+if [[ $# < 1 ]]; then
+    echo "Usage: $0 <ClassName(s)>"
+    exit 1
+fi
+files=""
+for i in $@; do
+    echo "#ifndef $(echo $i|tr '[a-z]' '[A-Z]')" > "$i.h"
+    echo "#define $(echo $i|tr '[a-z]' '[A-Z]')" >> "$i.h"
+    echo "//$i.h: " >> "$i.h"
+    echo "//Created: $(date)" >> "$i.h"
+    echo "" >> "$i.h"
+    echo "class $i {">> "$i.h"
+    echo "" >> "$i.h"
+    echo "};" >> "$i.h"
+    echo "#endif//$(echo $i|tr '[a-z]' '[A-Z]')" >> "$i.h"
+    files=$files" $i.h"
+done;
+vim -p $files
+exit 0

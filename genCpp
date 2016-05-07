@@ -1,0 +1,34 @@
+#!/bin/bash
+#genCpp: Script to ...
+#Created: Sat May  7 11:39:50 CDT 2016
+shortStars='\*'
+for((i=2;i<70;i++)); do
+    shortStars=$shortStars'\*';
+done
+stars=$shortStars
+for((i=0;i<10;i++)); do
+    stars=$stars'\*';
+done
+replaceCmd=$replaceCmd"s/\(^\s*\)"
+replaceCmd=$replaceCmd"\(\([^ ^(]*[ ][ ]*\)\{0,\}\)"
+replaceCmd=$replaceCmd"\([^ ^(]*\)"
+replaceCmd=$replaceCmd"\([^;]*\);"
+replaceCmd=$replaceCmd"/\/$stars\n  \4 \n  ...\n$shortStars\/\n\2"
+r2="\4\5{\n\n}\n/g"
+
+files="";
+for i in $@;do
+    filename=$(echo $i|sed "s/\.h\(pp\)*/.cpp/g")
+    name=$(cat $i|grep class|sed "s/.*class[ ]*\([a-zA-Z]*\).*/\1/g")
+    echo "/* $filename" > $filename
+    echo "   Created: $(date)" >> $filename
+    echo "*/" >> $filename
+    echo "" >> $filename
+    echo "#include \"$i\"" >> $filename
+    echo "" >> $filename
+    cat $i | grep "(" |grep -v "{" | sed "$replaceCmd$name::$r2" >> $filename
+    files=$files" $filename";
+done
+vim -p $files
+exit 0
+

@@ -1,0 +1,25 @@
+#!/bin/bash
+#newCpp: Script to create new cpp files
+#Created: Fri May  6 name7:26:46 CDT 2016
+if [[ "$1" == "--help" ]]; then
+    echo "Usage: $0 <main's file name>"
+    exit 1;
+fi
+name="main.cpp"
+if [[ $# == 1 ]]; then
+    name="$1.cpp"
+fi;
+
+echo '/*'> $name
+echo "$name: ...">> $name
+echo "Created: $(date)">> $name
+echo '*/'>>$name
+echo '#include <iostream>'>>$name
+echo 'using namespace std;'>>$name
+echo 'int main(int argc, char** argv){'>>$name
+echo '    return 0;'>>$name
+echo '}'>>$name
+
+vim -p $name
+
+exit 0
