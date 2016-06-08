@@ -1,0 +1,11 @@
+#!/bin/bash
+#mergeMarkComment: Script to comment out mergeMarkers
+#Created: Sat May  7 14:25:07 CDT 2016
+for i in $@; do
+    if [[ "$i" != "$0" ]]; then
+        sed -i "s/<<<<<<</\/\/\* <<<<<<</g" $i
+        sed -i "s/=======/\/\*\/ =======/g" $i
+        sed -i "s/>>>>>>>/\/\/\*\/>>>>>>>/g" $i
+    fi
+done
+exit 0

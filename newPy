@@ -1,0 +1,5 @@
+#!/bin/bash
+#newPy: Script to make a new python file
+#Created: Tue May 31 12:32:58 CDT 2016
+
+exit 0
