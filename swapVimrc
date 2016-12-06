@@ -1,0 +1,7 @@
+#!/bin/bash
+#swapVimrc: Script to vimrc between mine and the old one
+#Created: Tue Dec  6 11:04:36 CST 2016
+mv ~/.vimrcOld ~/.tmp
+mv ~/.vimrc ~/.vimrcOld
+mv ~/.tmp ~/.vimrc
+exit 0
