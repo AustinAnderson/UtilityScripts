@@ -1,0 +1,13 @@
+#!/bin/bash
+#gitExtentions: Script to ...
+#Created: Tue May 30 10:42:19 CDT 2017
+
+#exec spawns a new process and passes $@ as arguments, then printf prints them
+#one per line and adds them to the git ignore file
+#since aliases execute at the git root, the gitignore's relative path is sufficient
+git config --global alias.ignore '!exec printf "%s\n" $@ >> .gitignore;exit 0'
+
+#with aliases executing at the git project's root, pwd works for this aswell
+git config --global alias.root '!pwd'
+
+exit 0
