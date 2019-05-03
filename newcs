@@ -1,0 +1,29 @@
+#!/bin/bash
+path=$(pwd)
+done=false;
+foundPrj=1;
+until $done; do
+    ls $path | grep ".*.csproj" > /dev/null;
+    foundPrj=$?
+    path="$(readlink -f "$path"/..)"
+    if [[ $foundPrj == 0 || $path == / ]]; then
+        done=true;
+    fi
+done
+namespace="SomeNamespace"
+if [[ $foundPrj == 0 ]]; then
+    currentPath=$(pwd)
+    namespace=$(echo ${currentPath##*$path/}|tr '/' '.')
+fi
+className="Program"
+if [[ $# == 1 ]]; then
+    className=$1
+fi
+echo "using System;
+namespace $namespace
+{
+    public class $className
+    {
+    }
+}
+">$className.cs
