@@ -18,6 +18,6 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd;
  
 export PS1="$SKY[\\W]$GREEN\$(parse_git_branch)$SKY\\!:>$NO_COLOR"
 export USER="Austin Anderson"
-export PATH=$PATH:/home/andersonau/UtilityScripts/
 
 export HOME="/mnt/c/Users/Austi"
+export PATH=$PATH:$HOME/UtilityScripts/
