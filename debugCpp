@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ ! -f ~/.gdbinit ]; then
+    cp $(dirname $0)/.gdbinit ~
+fi
+grep -HornI --color=none '//GDB.*' | sed 's/\([^\/]*\/\)*\(.*\):\/\/GDB/b \2/g' > /tmp/gdbBreakPoints
+echo "dashboard -layout source expressions variables breakpoints history" >> /tmp/gdbBreakPoints
+cat gdbAdditionalCmds >> /tmp/gdbBreakPoints
+echo "r" >> /tmp/gdbBreakPoints
+gdb -x /tmp/gdbBreakPoints $@
+rm /tmp/gdbBreakPoints
